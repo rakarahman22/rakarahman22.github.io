@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peminjaman Buku</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .peminjaman-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .table-container {
+            margin-top: 30px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Perpustakaan</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Form Peminjaman Buku -->
+    <div class="container">
+        <div class="peminjaman-container">
+            <h2 class="text-center mb-4">Formulir Peminjaman Buku</h2>
+            <form id="peminjamanForm">
+                <div class="form-group">
+                    <label for="namaPeminjam">Nama Peminjam</label>
+                    <input type="text" id="namaPeminjam" class="form-control" placeholder="Masukkan nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <label for="judulBuku">Judul Buku</label>
+                    <input type="text" id="judulBuku" class="form-control" placeholder="Masukkan judul buku" required>
+                </div>
+                <div class="form-group">
+                    <label for="tanggalPinjam">Tanggal Peminjaman</label>
+                    <input type="date" id="tanggalPinjam" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="tanggalKembali">Tanggal Pengembalian</label>
+                    <input type="date" id="tanggalKembali" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Ajukan Peminjaman</button>
+            </form>
+        </div>
+
+        <!-- Daftar Peminjaman -->
+        <div class="table-container">
+            <h3 class="text-center">Daftar Peminjaman</h3>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Nama Peminjam</th>
+                        <th>Judul Buku</th>
+                        <th>Tanggal Peminjaman</th>
+                        <th>Tanggal Pengembalian</th>
+                    </tr>
+                </thead>
+                <tbody id="peminjamanList">
+                    <!-- Data akan ditambahkan di sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 22552011248_Raka Aulia Rahman_TIF-RP-22-CID
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Menangani Pengajuan Peminjaman
+        const peminjamanForm = document.getElementById('peminjamanForm');
+        const peminjamanList = document.getElementById('peminjamanList');
+        let counter = 1;
+
+        peminjamanForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Ambil data dari form
+            const namaPeminjam = document.getElementById('namaPeminjam').value;
+            const judulBuku = document.getElementById('judulBuku').value;
+            const tanggalPinjam = document.getElementById('tanggalPinjam').value;
+            const tanggalKembali = document.getElementById('tanggalKembali').value;
+
+            // Validasi tanggal
+            if (new Date(tanggalPinjam) >= new Date(tanggalKembali)) {
+                alert('Tanggal pengembalian harus setelah tanggal peminjaman!');
+                return;
+            }
+
+            // Tambahkan data ke tabel
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${counter++}</td>
+                <td>${namaPeminjam}</td>
+                <td>${judulBuku}</td>
+                <td>${tanggalPinjam}</td>
+                <td>${tanggalKembali}</td>
+            `;
+            peminjamanList.appendChild(row);
+
+            // Reset form
+            peminjamanForm.reset();
+        });
+    </script>
+</body>
+</html>

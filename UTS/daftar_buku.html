@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Buku</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            margin-top: 20px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .table-container {
+            margin-top: 30px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+        .table-container h3 {
+            text-align: center;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .search-container input {
+            width: 80%;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Perpustakaan</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Daftar Buku -->
+    <div class="container">
+        <div class="search-bar">
+            <h2 class="text-center">Daftar Buku Perpustakaan</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="form-control" placeholder="Cari buku berdasarkan judul...">
+                <button id="searchButton" class="btn btn-custom">Cari</button>
+            </div>
+        </div>
+
+        <!-- Tabel Daftar Buku -->
+        <div class="table-container">
+            <h3>Daftar Buku Tersedia</h3>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Judul Buku</th>
+                        <th>Penulis</th>
+                        <th>Genre</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="bookList">
+                    <!-- Daftar Buku akan muncul di sini -->
+                    <tr>
+                        <td>1</td>
+                        <td>JavaScript untuk Pemula</td>
+                        <td>John Doe</td>
+                        <td>Programming</td>
+                        <td><a href="peminjaman.html" class="btn btn-primary btn-sm">Pinjam Buku</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>HTML & CSS Design</td>
+                        <td>Jane Smith</td>
+                        <td>Web Design</td>
+                        <td><a href="peminjaman.html" class="btn btn-primary btn-sm">Pinjam Buku</a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Dasar-Dasar Python</td>
+                        <td>Michael Brown</td>
+                        <td>Programming</td>
+                        <td><a href="peminjaman.html" class="btn btn-primary btn-sm">Pinjam Buku</a></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Digital Marketing 101</td>
+                        <td>Emily White</td>
+                        <td>Marketing</td>
+                        <td><a href="peminjaman.html" class="btn btn-primary btn-sm">Pinjam Buku</a></td>
+                    </tr>
+                    <!-- Data lebih banyak bisa ditambahkan sesuai kebutuhan -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        © 2024 22552011248_Raka Aulia Rahman_TIF-RP-22-CID
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fungsi untuk melakukan pencarian
+        document.getElementById("searchButton").addEventListener("click", function() {
+            const searchValue = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.getElementById("bookList").getElementsByTagName("tr");
+
+            for (let i = 0; i < rows.length; i++) {
+                const titleCell = rows[i].cells[1];
+                const bookTitle = titleCell.textContent || titleCell.innerText;
+
+                if (bookTitle.toLowerCase().indexOf(searchValue) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

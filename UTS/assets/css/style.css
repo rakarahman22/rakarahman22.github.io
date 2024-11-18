@@ -1,0 +1,9 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.jumbotron {
+    background: url('../images/library.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+}

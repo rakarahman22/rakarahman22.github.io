@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelian Buku</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .pembelian-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .table-container {
+            margin-top: 30px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .card {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Perpustakaan</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Form Pembelian Buku -->
+    <div class="container">
+        <div class="pembelian-container">
+            <h2 class="text-center mb-4">Form Pembelian Buku</h2>
+            <form id="pembelianForm">
+                <div class="form-group">
+                    <label for="namaPembeli">Nama Pembeli</label>
+                    <input type="text" id="namaPembeli" class="form-control" placeholder="Masukkan nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <label for="judulBuku">Judul Buku</label>
+                    <input type="text" id="judulBuku" class="form-control" placeholder="Masukkan judul buku" required>
+                </div>
+                <div class="form-group">
+                    <label for="jumlahBuku">Jumlah Buku</label>
+                    <input type="number" id="jumlahBuku" class="form-control" placeholder="Masukkan jumlah buku" required min="1">
+                </div>
+                <div class="form-group">
+                    <label for="hargaBuku">Harga per Buku (IDR)</label>
+                    <input type="number" id="hargaBuku" class="form-control" placeholder="Masukkan harga per buku" required min="1000">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Beli Buku</button>
+            </form>
+        </div>
+
+        <!-- Daftar Pembelian -->
+        <div class="table-container">
+            <h3 class="text-center">Daftar Pembelian Buku</h3>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Nama Pembeli</th>
+                        <th>Judul Buku</th>
+                        <th>Jumlah Buku</th>
+                        <th>Total Harga (IDR)</th>
+                    </tr>
+                </thead>
+                <tbody id="pembelianList">
+                    <!-- Data akan ditambahkan di sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 22552011248_Raka Aulia Rahman_TIF-RP-22-CID
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Menangani Pengajuan Pembelian Buku
+        const pembelianForm = document.getElementById('pembelianForm');
+        const pembelianList = document.getElementById('pembelianList');
+        let counter = 1;
+
+        pembelianForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Ambil data dari form
+            const namaPembeli = document.getElementById('namaPembeli').value;
+            const judulBuku = document.getElementById('judulBuku').value;
+            const jumlahBuku = document.getElementById('jumlahBuku').value;
+            const hargaBuku = document.getElementById('hargaBuku').value;
+
+            // Hitung total harga
+            const totalHarga = jumlahBuku * hargaBuku;
+
+            // Tambahkan data ke tabel
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${counter++}</td>
+                <td>${namaPembeli}</td>
+                <td>${judulBuku}</td>
+                <td>${jumlahBuku}</td>
+                <td>${totalHarga}</td>
+            `;
+            pembelianList.appendChild(row);
+
+            // Reset form
+            pembelianForm.reset();
+        });
+    </script>
+</body>
+</html>
